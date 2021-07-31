@@ -19,9 +19,11 @@ const launchesSchema = mongoose.Schema({
     },
     target: {
         // type: mongoose.isValidObjectId,
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Planet',
+        // type: mongoose.Schema.Types.ObjectId,
         // ref: 'Planet',
+        // ref: 'Planet',
+        type: String,
+        required: true,
     },
     customers: [ String ],
     upcoming: {
