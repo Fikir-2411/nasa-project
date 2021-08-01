@@ -9,6 +9,9 @@
     "watch": "nodemon src/server.js",
     "start": "node src/server.js"
   },
+  "jest":{
+    "testEnvironment": "node"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
