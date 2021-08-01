@@ -36,7 +36,7 @@ async function getLatestFlightNumber() {
         return DEFAULT_FLIGHT_NUMBER;
     }
 
-    return latestLaunch.flightNumber;
+    return await latestLaunch.flightNumber;
 }
 
 async function getAllLaunches() {
@@ -61,16 +61,19 @@ async function saveLaunch(launch) {
     });
 }
 
-function addNewLaunch(launch) {
-    latestFlightNumber++;
-    launches.set(latestFlightNumber, Object.assign(launch, {
+async function scheduleNewLaunch(launch) {
+    const newFlightNumber = await getLatestFlightNumber() + 1;
+
+    const newLaunch = Object.assign(launch, {
         success: true,
         upcoming: true,
         customers: ['ZTM', 'NASA'],
-        flightNumber: latestFlightNumber,
-    }));
+        flightNumber: newFlightNumber,
+    });
 
+    await saveLaunch(newLaunch);
 }
+
 
 function abortLaunchById(launchId) {
     const aborted = launches.get(launchId);
@@ -82,6 +85,6 @@ function abortLaunchById(launchId) {
 module.exports = {
     existsLaunchWithId,
     getAllLaunches,
-    addNewLaunch,
+    scheduleNewLaunch,
     abortLaunchById,
 };
