@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 //update this to match your own MongoDB connection string.
+//it can be from either the cloud atlas or local database
 const MONGO_URL = 'mongouri';
 
 mongoose.connection.once('open', () => {
